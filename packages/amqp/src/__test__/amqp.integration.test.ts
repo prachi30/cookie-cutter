@@ -70,6 +70,7 @@ describe("AmqpSink and AmqpSource", () => {
         },
         queue: {
             name: "defaultQueueName",
+            assertQueue: true,
         },
         encoder: new JsonMessageEncoder(),
     };

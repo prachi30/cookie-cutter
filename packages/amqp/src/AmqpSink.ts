@@ -44,9 +44,11 @@ export class AmqpSink
         };
         this.conn = await amqp.connect(options);
         this.channel = await this.conn.createChannel();
-        const queueName = this.config.queue.name;
-        const durable = this.config.queue.durable;
-        await this.channel.assertQueue(queueName, { durable });
+        if (this.config.queue.assertQueue) {
+            const queueName = this.config.queue.name;
+            const durable = this.config.queue.durable;
+            await this.channel.assertQueue(queueName, { durable });
+        }
     }
 
     public async sink(output: IterableIterator<IPublishedMessage>): Promise<void> {

@@ -65,9 +65,11 @@ export class AmqpSource implements IInputSource, IRequireInitialization, IDispos
         };
         this.conn = await amqp.connect(options);
         this.channel = await this.conn.createChannel();
-        const queueName = this.config.queue.name;
-        const durable = this.config.queue.durable;
-        await this.channel.assertQueue(queueName, { durable });
+        if (this.config.queue.assertQueue) {
+            const queueName = this.config.queue.name;
+            const durable = this.config.queue.durable;
+            await this.channel.assertQueue(queueName, { durable });
+        }
         this.channel.prefetch(50);
     }
 

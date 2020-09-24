@@ -38,6 +38,7 @@ export interface IAmqpServerConfig {
 export interface IAmqpQueueConfig {
     readonly name: string;
     readonly durable?: boolean;
+    readonly assertQueue?: boolean;
 }
 
 export interface IAmqpMessageConfig {

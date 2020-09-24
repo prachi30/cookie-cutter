@@ -68,6 +68,14 @@ export class AmqpQueueConfig implements IAmqpQueueConfig {
     public get durable(): boolean {
         return config.noop();
     }
+
+    @config.field(config.converters.boolean)
+    public set assertQueue(_: boolean) {
+        config.noop();
+    }
+    public get assertQueue(): boolean {
+        return config.noop();
+    }
 }
 
 @config.section
